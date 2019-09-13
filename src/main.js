@@ -11,8 +11,6 @@ $(document).ready(function(){
 function getAndDisplayData(){
   const healthcondition = $("#healthcondition").val()
   const doctorFirstName = $("#doctorName").val();
-  console.log(healthcondition)
-  console.log("here")
   callDoctorAPI(doctorFirstName, healthcondition).then(displayDataAsTable, displayError);
 }
 function callDoctorAPI(doctorFirstName,healthcondition){
@@ -35,5 +33,5 @@ function displayDataAsTable(response){
   }
 }
 function displayError(response){
-    console.log(response.statusText);
+    alert(response.statusText);
 }
