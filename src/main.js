@@ -4,6 +4,7 @@ import './styles.css';
 $(document).ready(function(){
   $("#formOne").submit(function(event){
     event.preventDefault();
+    console.log("ok")
     getAndDisplayData();
   })
 })
@@ -11,6 +12,8 @@ $(document).ready(function(){
 function getAndDisplayData(){
   const healthcondition = $("#healthcondition").val()
   const doctorFirstName = $("#doctorName").val();
+  console.log(healthcondition)
+  console.log("here")
   callDoctorAPI(doctorFirstName, healthcondition).then(displayDataAsTable, displayError);
 }
 
@@ -21,12 +24,14 @@ function callDoctorAPI(doctorFirstName,healthcondition){
 }
 
 function displayDataAsTable(response){
+  console.log("here")
     const doctors = JSON.parse(response);
+    console.log("jere")
     console.log(doctors)
     doctors.data.forEach(function(doctor){
-      console.log(doctor.practices[0].visit_address.street)
-
-      $(".firstName").append(`<li> ${doctor.profile.first_name} ${doctor.profile.last_name} <br> ${doctor.profile.bio} <br> <img src=${doctor.profile.image_url}  </img> <br> My address: ${doctor.practices[0].visit_address.street} <br> I'm willing to accept new patients:${doctor.practices[0].accepts_new_patients} </li> <br> <br>`)
+      console.log(doctor)
+      $(".firstName").append(`<li> <h1> ${doctor.profile.first_name} ${doctor.profile.last_name} </h1> <br> ${doctor.profile.bio} <br> <img src=${doctor.profile.image_url}  </img> <br> My address: ${doctor.practices[0].visit_address.street} <br> My number: ${doctor.practices[0].phones[0].number} <br> I'm willing to accept new patients:${doctor.practices[0].accepts_new_patients} <br>
+     <a href=${doctor.practices[0].website}>My Website</a> </li> <br> <br>`)
       // $(".lastName").append(`<li> ${doctor.profile.last_name} </li>`)
     })
 }
