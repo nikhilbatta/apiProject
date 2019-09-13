@@ -24,13 +24,10 @@ function displayDataAsTable(response){
     const doctors = JSON.parse(response);
     doctors.data.forEach(function(doctor){
       console.log(doctor.profile)
+      $(".firstName").append(`<li> ${doctor.profile.first_name} ${doctor.profile.last_name} </li>`)
+      // $(".lastName").append(`<li> ${doctor.profile.last_name} </li>`)
     })
-
 }
 function displayError(response){
-    // const doctors = JSON.parse(response);
-    // doctors.data.forEach(function(doctor){
-    //   console.log(doctor.profile)
-    // })
-    console.log(response);
+    console.log(response.statusText);
 }
