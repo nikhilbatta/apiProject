@@ -4,3 +4,6 @@
   padding: 50px;
   margin: 20px;
 }
+.errorMessage{
+  display: none;
+}
