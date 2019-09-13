@@ -11,7 +11,7 @@ $(document).ready(function(){
 function getAndDisplayData(){
   const healthcondition = $("#healthcondition").val()
   const doctorFirstName = $("#doctorName").val();
-  callDoctorAPI(doctorFirstName, healthcondition).then(displayDataAsTable, displayError);
+  callDoctorAPI(doctorFirstName, healthcondition).then(displayDataFromTemplate, displayError);
 }
 function callDoctorAPI(doctorFirstName,healthcondition){
   let doctorByCondition = new SearchForDoctor();
@@ -34,4 +34,21 @@ function displayDataAsTable(response){
 }
 function displayError(response){
     alert(response.statusText);
+}
+function displayDataFromTemplate(response){
+  const doctors = JSON.parse(response);
+  if(doctors.data.length === 0){
+    $(".errorMessage").show()
+    $(".firstName").hide();
+  } else {
+    $("#searchResult").text("")
+    $(".errorMessage").hide();
+    var  doctorTemplate =  $("#doctorTemplate")
+  doctors.data.forEach(function(doctor){
+      var newNode = doctorTemplate.clone()
+    $(newNode).find(".firstLast").text(`${doctor.profile.first_name} ${doctor.profile.last_name}`)
+
+  $("#searchResult").append(newNode)
+  })
+}
 }
