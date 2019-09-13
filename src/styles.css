@@ -1,3 +1,6 @@
-body {
-  background-color: blue;
+.firstName {
+  width: 900px;
+  border: 15px solid green;
+  padding: 50px;
+  margin: 20px;
 }
